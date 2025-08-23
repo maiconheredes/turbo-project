@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "@easypost/api": "^8.2.0",
+    "@tanstack/react-query": "^5.85.5",
+    "classnames": "^2.5.1",
     "next": "15.5.0",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "react-hook-form": "^7.62.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
