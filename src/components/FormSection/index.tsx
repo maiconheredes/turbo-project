@@ -1,9 +1,15 @@
 "use client";
 
 import classNames from "classnames";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { FieldConfig, FormInputs } from "../ShipmentForm";
 
 interface FormSectionProps {
   title: string
+  register: UseFormRegister<FormInputs>
+  errors: FieldErrors<FormInputs>
+  group: keyof FormInputs
+  fields: Record<string, FieldConfig>
 }
 
 function getFieldName(group: string, name: string) {

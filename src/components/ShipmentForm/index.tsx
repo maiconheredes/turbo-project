@@ -3,6 +3,7 @@
 import { ADRESS_FIELDS, PARCEL_FIELDS } from "@/consts";
 import { SubmitHandler, useForm } from "react-hook-form"
 import FormSection from "../FormSection";
+import useShipmentRequest from "@/hooks/useShipmentRequest";
 
 const FORM_GROUPS = {
   FROM: "from",
@@ -16,21 +17,21 @@ const FORM_FIELDS = {
   [FORM_GROUPS.PARCEL]: PARCEL_FIELDS,
 } as const;
 
-type FieldConfig = {
+export type FieldConfig = {
   name: string;
   isRequired: boolean;
   type: "text" | "number";
 };
 
-type FieldsGroup = Record<string, FieldConfig>;
+export type FieldsGroup = Record<string, FieldConfig>;
 
-type FieldsToType<T extends FieldsGroup> = {
+export type FieldsToType<T extends FieldsGroup> = {
   [K in keyof T as T[K]["name"]]: T[K]["type"] extends "number"
     ? number
     : string;
 };
 
-type Inputs = {
+export type FormInputs = {
   FROM: FieldsToType<typeof FORM_FIELDS.FROM>;
   TO: FieldsToType<typeof FORM_FIELDS.TO>;
   PARCEL: FieldsToType<typeof FORM_FIELDS.PARCEL>;
@@ -39,14 +40,16 @@ type Inputs = {
 interface ShipmentFormProps {}
 
 function ShipmentForm({}: ShipmentFormProps) {
+  const {} = useShipmentRequest();
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<FormInputs>();
   
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormInputs> = (data) => console.log(data);
 
   console.log("errors", errors);
 
